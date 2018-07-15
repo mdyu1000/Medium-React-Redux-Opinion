@@ -7,7 +7,7 @@ export default class Component extends React.Component {
 	}
 
 	handleClickNextGP() {
-		this.props.onClickNextGP()
+		this.props.setNextPG()
 	}
 
   render() {

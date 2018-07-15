@@ -1,34 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import {
+  setNextPG
+} from '../action/guineaPigAction'
 import Component from '../component/Component'
 
-const GUINEAPATHS = [
-  'https://s3.amazonaws.com/codecademy-content/courses/React/react_photo-guineapig-1.jpg',
-  'https://s3.amazonaws.com/codecademy-content/courses/React/react_photo-guineapig-2.jpg',
-  'https://s3.amazonaws.com/codecademy-content/courses/React/react_photo-guineapig-3.jpg',
-  'https://s3.amazonaws.com/codecademy-content/courses/React/react_photo-guineapig-4.jpg'
-];
+const mapStateToProps = state => ({
+  ...state,
+  src: state.guineaPigReducer.GUINEAPATHS[state.guineaPigReducer.index]
+})
 
-export default class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-    	currentGP: 0 
-    };
-    this.handleClickNextGP = this.handleClickNextGP.bind(this)
-  }  
+const mapDispatchToProps = dispatch => ({
+  setNextPG: () => dispatch(setNextPG())
+})
 
-  handleClickNextGP() {
-    let current = this.state.currentGP;
-    let next = ++current % GUINEAPATHS.length;
-    this.setState({ currentGP: next });
-  }
-
-  render() {
-    const src = GUINEAPATHS[this.state.currentGP];
-    return (
-    	<Component src={src} 
-    		onClickNextGP={this.handleClickNextGP}
-  		/>
-  	) 
-  }
-}
+export default connect(mapStateToProps, mapDispatchToProps)(Component);
