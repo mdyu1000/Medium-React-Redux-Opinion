@@ -1,9 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import {
-  setNextPG
+  setNextPG,
+  fetchAllPG
 } from '../action/guineaPigAction'
 import Component from '../component/Component'
+
+class Container extends React.Component {
+	constructor(props){
+		super(props)
+	}
+
+	componentWillMount(){
+		this.props.fetchAllPG()
+	}
+
+	render(){
+		return (
+			<Component 
+				src={this.props.src}
+				setNextPG={this.props.setNextPG}
+			/>
+		)
+	}
+}
 
 const mapStateToProps = state => ({
   ...state,
@@ -11,7 +31,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setNextPG: () => dispatch(setNextPG())
+  setNextPG: () => dispatch(setNextPG()),
+  fetchAllPG: () => dispatch(fetchAllPG())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

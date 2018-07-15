@@ -1,5 +1,6 @@
 import {
-	SET_NEXT_PG
+	SET_NEXT_PG,
+	RECEIVE_ALL_PG
 } from '../action/guineaPigAction'
 
 const initialState = {
@@ -18,6 +19,11 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				index: (state.index + 1) % state.GUINEAPATHS.length
+			}
+		case RECEIVE_ALL_PG:
+			return {
+				...state,
+				GUINEAPATHS: action.AllPG
 			}
 		default:
 			return state
